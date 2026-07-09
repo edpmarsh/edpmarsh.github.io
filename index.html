@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edward Marsh — Automation & Infrastructure Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #1a2744;
+      --blue:  #2563c4;
+      --steel: #3d5a8a;
+      --smoke: #f0f3f8;
+      --white: #ffffff;
+      --gray:  #5a6a7e;
+      --light: #dce6f5;
+      --mono:  'IBM Plex Mono', monospace;
+      --sans:  'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #0f1c35 0%, #1a2744 60%, #1e3260 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -20%;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,196,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner { max-width: 860px; margin: 0 auto; width: 100%; }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: #7fa8e0;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 span { color: #5b9cf6; }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: #a8bdd8;
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+
+    .stat-bar {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat { display: flex; flex-direction: column; gap: 0.2rem; }
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #5b9cf6;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: #7a95b8;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.18s ease;
+      font-family: var(--sans);
+    }
+    .btn-primary { background: var(--blue); color: var(--white); border: 1px solid var(--blue); }
+    .btn-primary:hover { background: #1d50a8; border-color: #1d50a8; }
+    .btn-ghost { background: transparent; color: #a8bdd8; border: 1px solid rgba(255,255,255,0.2); }
+    .btn-ghost:hover { border-color: #5b9cf6; color: #5b9cf6; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 860px; margin: 0 auto; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: #5b9cf6;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 2.5rem;
+      color: var(--white);
+    }
+
+    /* ── PROJECTS ── */
+    .projects { background: #0f1c35; }
+
+    .project-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 6px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.2s ease;
+    }
+    .project-card:hover { border-color: rgba(91,156,246,0.4); }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .project-name {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #5b9cf6;
+    }
+
+    .project-badge {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .badge-public  { background: rgba(26,122,74,0.2);  color: #4caf82; border: 1px solid rgba(26,122,74,0.3); }
+    .badge-private { background: rgba(90,106,126,0.2); color: #8fa3bb; border: 1px solid rgba(90,106,126,0.3); }
+
+    .project-desc {
+      color: #a8bdd8;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      background: rgba(37,99,196,0.15);
+      color: #7fa8e0;
+      border: 1px solid rgba(37,99,196,0.25);
+      border-radius: 3px;
+    }
+
+    .project-detail { font-size: 0.85rem; color: #7a95b8; line-height: 1.6; }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: #5b9cf6;
+      text-decoration: none;
+      margin-top: 1.25rem;
+      transition: color 0.15s;
+    }
+    .project-link:hover { color: #90bfff; }
+
+    /* ── SKILLS ── */
+    .skills { background: #131f38; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .skill-group {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 5px;
+      padding: 1.25rem;
+    }
+
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: #5b9cf6;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .skill-list li {
+      font-size: 0.875rem;
+      color: #a8bdd8;
+      padding-left: 0.75rem;
+      position: relative;
+    }
+
+    .skill-list li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: #3d5a8a;
+    }
+
+    .skill-list li em {
+      font-style: normal;
+      color: #7a95b8;
+      font-size: 0.8rem;
+    }
+
+    /* direction callout */
+    .direction-box {
+      background: rgba(37,99,196,0.1);
+      border: 1px solid rgba(37,99,196,0.25);
+      border-left: 3px solid #2563c4;
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .direction-box p {
+      font-size: 0.9rem;
+      color: #a8bdd8;
+      line-height: 1.7;
+    }
+
+    .direction-box strong {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: #5b9cf6;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    .certs { background: #0f1c35; }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .cert-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 5px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .cert-name { font-size: 0.875rem; font-weight: 500; color: var(--white); }
+    .cert-meta { font-family: var(--mono); font-size: 0.7rem; color: #7a95b8; }
+    .cert-note { font-size: 0.75rem; color: #5a7a8a; margin-top: 0.2rem; font-style: italic; }
+
+    .cert-active   { border-left: 3px solid #2563c4; }
+    .cert-progress { border-left: 3px solid #d4921a; }
+    .cert-earned   { border-left: 3px solid #3d5a6a; }
+
+    .cert-status {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.2rem;
+    }
+    .status-active   { color: #4caf82; }
+    .status-progress { color: #e8a838; }
+    .status-earned   { color: #7a95b8; }
+
+    /* ── CONTACT ── */
+    .contact { background: #131f38; text-align: center; }
+
+    .contact-desc {
+      color: #a8bdd8;
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a1425;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: #3d5a7a;
+      letter-spacing: 0.05em;
+    }
+
+    code {
+      font-family: var(--mono);
+      font-size: 0.8em;
+      color: #7fa8e0;
+    }
+
+    @media (max-width: 600px) {
+      .stat-bar { gap: 1.5rem; }
+      .project-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Edward Marsh &mdash; Houston, TX</p>
+    <h1>Automation &amp; Infrastructure<br /><span>Engineer</span></h1>
+    <p class="hero-desc">
+      12+ years building PowerShell automation and operating large-scale Microsoft
+      infrastructure at Fortune 500 companies in Energy, Finance, and Communications.
+      I write code to eliminate manual operational work &mdash; and build systems
+      that run reliably in production without babysitting.
+    </p>
+
+    <div class="stat-bar">
+      <div class="stat">
+        <span class="stat-num">1.25M</span>
+        <span class="stat-label">Mailboxes operated</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">200+</span>
+        <span class="stat-label">Automation scripts built</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">$500K+</span>
+        <span class="stat-label">Operational savings delivered</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">22K+</span>
+        <span class="stat-label">Manual hours eliminated / yr</span>
+      </div>
+    </div>
+
+    <div class="hero-links">
+      <a href="https://linkedin.com/in/edpmarsh" class="btn btn-primary" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/edpmarsh" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:emars6315@gmail.com" class="btn btn-ghost">Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects">
+  <div class="section-inner">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">Projects</h2>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">LoopEvalTools</span>
+        <span class="project-badge badge-public">Public</span>
+      </div>
+      <p class="project-desc">
+        Windows Server registry configuration auditor. Reads a JSON desired-state baseline
+        (registry paths grouped by category &mdash; Authentication, Logon Security, Identity,
+        Diagnostics) and compares actual server values against expected values across a fleet
+        via WinRM. Scores each server 0&ndash;100 and generates three report formats per run.
+      </p>
+      <div class="project-tags">
+        <span class="tag">PowerShell</span>
+        <span class="tag">Pester</span>
+        <span class="tag">GitHub Actions</span>
+        <span class="tag">Azure Key Vault</span>
+        <span class="tag">WinRM</span>
+        <span class="tag">JSON</span>
+        <span class="tag">HTML Reports</span>
+      </div>
+      <p class="project-detail">
+        Output: per-server JSON, combined JSON, CSV, and color-coded HTML report
+        (red = drifted / missing / error, green = compliant). CI pipeline runs Pester
+        unit tests automatically on push/PR. Remote execution workflow uses Azure Key Vault
+        for credential retrieval, triggered via <code>workflow_dispatch</code>.
+      </p>
+      <a href="https://github.com/edpmarsh/LoopEvalTools" class="project-link" target="_blank" rel="noopener">
+        View on GitHub &rarr;
+      </a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-name">Job Search Dashboard V2</span>
+        <span class="project-badge badge-private">Private</span>
+      </div>
+      <p class="project-desc">
+        A fully client-side job search command center built in vanilla JS &mdash; no backend,
+        no database. Ingests live job board results and static ATS feeds, scores postings
+        against configurable keyword weights and role filters, and tracks the full pipeline
+        in a Kanban board with recruiter and vendor intelligence tracking.
+        Includes an AI-assisted feed refresh flow via external agent prompt templates.
+      </p>
+      <div class="project-tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">HTML/CSS</span>
+        <span class="tag">AI Agent Integration</span>
+        <span class="tag">Kanban</span>
+        <span class="tag">Client-side</span>
+      </div>
+      <p class="project-detail">
+        Private repo &mdash; contains personal search configuration. Available for discussion on request.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills">
+  <div class="section-inner">
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-title">Skills</h2>
+
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <p class="skill-group-title">Scripting &amp; Dev</p>
+        <ul class="skill-list">
+          <li>PowerShell <em>— advanced, incl. Workflows</em></li>
+          <li>Microsoft Graph PowerShell</li>
+          <li>Python <em>— intermediate, active development</em></li>
+          <li>Pester / GitHub Actions</li>
+          <li>.NET fundamentals</li>
+          <li>VS Code / GitHub</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-title">Azure &amp; Automation</p>
+        <ul class="skill-list">
+          <li>Azure Functions / Logic Apps</li>
+          <li>Azure Monitor / AI Foundry</li>
+          <li>Azure Key Vault / SQL / Blob</li>
+          <li>SCORCH platform <em>— admin &amp; migration</em></li>
+          <li>PowerApps / Azure DevOps</li>
+          <li>CI/CD pipelines</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-title">Microsoft 365 &amp; Messaging</p>
+        <ul class="skill-list">
+          <li>Exchange Hybrid <em>— 2010&ndash;2019 / EXO</em></li>
+          <li>EOP / Defender for O365</li>
+          <li>Transport rules &amp; mail flow</li>
+          <li>SPF / DKIM / DMARC</li>
+          <li>DAG design &amp; operations</li>
+          <li>Microsoft Purview / eDiscovery</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-title">Identity &amp; Infrastructure</p>
+        <ul class="skill-list">
+          <li>Entra ID / Hybrid Identity</li>
+          <li>Active Directory</li>
+          <li>RBAC administration</li>
+          <li>Windows Server 2012&ndash;2019</li>
+          <li>AWS <em>— EC2, S3, CloudWatch, SNS, SSM</em></li>
+          <li>WSUS / Patch management</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="direction-box">
+      <strong>Currently Building</strong>
+      <p>
+        Developing proactive infrastructure monitoring solutions that combine Azure Monitor,
+        Functions, Logic Apps, and AI Foundry &mdash; moving from reactive alerting toward
+        AI-assisted anomaly detection and self-resolution workflows. Expanding Python
+        development alongside PowerShell for broader automation tooling.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certs">
+  <div class="section-inner">
+    <p class="section-label">Credentials</p>
+    <h2 class="section-title">Certifications</h2>
+    <div class="cert-grid">
+
+      <div class="cert-item cert-active">
+        <span class="cert-name">Azure AI Engineer Associate</span>
+        <span class="cert-meta">AI-102 &bull; Microsoft</span>
+        <span class="cert-status status-active">Active</span>
+      </div>
+
+      <div class="cert-item cert-active">
+        <span class="cert-name">Azure AI Fundamentals</span>
+        <span class="cert-meta">AI-900 &bull; Microsoft</span>
+        <span class="cert-status status-active">Active</span>
+      </div>
+
+      <div class="cert-item cert-active">
+        <span class="cert-name">AWS Cloud Practitioner</span>
+        <span class="cert-meta">AWS CCP &bull; Amazon Web Services</span>
+        <span class="cert-status status-active">Active</span>
+      </div>
+
+      <div class="cert-item cert-active">
+        <span class="cert-name">SAFe Practitioner</span>
+        <span class="cert-meta">Scaled Agile Framework</span>
+        <span class="cert-status status-active">Active</span>
+      </div>
+
+      <div class="cert-item cert-progress">
+        <span class="cert-name">MS-102: Microsoft 365 Administrator</span>
+        <span class="cert-meta">Microsoft &bull; Exam in progress</span>
+        <span class="cert-status status-progress">In Progress</span>
+      </div>
+
+      <div class="cert-item cert-earned">
+        <span class="cert-name">Microsoft Certified Solutions Expert</span>
+        <span class="cert-meta">MCSE &bull; Microsoft</span>
+        
+        <span class="cert-status status-earned">Earned</span>
+      </div>
+
+      <div class="cert-item cert-earned">
+        <span class="cert-name">Microsoft Certified IT Professional</span>
+        <span class="cert-meta">MCITP: Enterprise Administrator &bull; Microsoft</span>
+        
+        <span class="cert-status status-earned">Earned</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <div class="section-inner">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Get in touch</h2>
+    <p class="contact-desc">
+      Open to senior automation, M365, messaging, and infrastructure engineering roles
+      at large enterprise organizations. Houston, TX &mdash; remote preferred,
+      Houston hybrid considered.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:emars6315@gmail.com" class="btn btn-primary">Email</a>
+      <a href="https://linkedin.com/in/edpmarsh" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/edpmarsh" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Edward Marsh &mdash; edpmarsh.github.io
+</footer>
+
+</body>
+</html>
